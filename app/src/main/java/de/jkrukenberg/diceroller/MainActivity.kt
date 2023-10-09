@@ -15,20 +15,24 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
 
         val rollButton: Button = findViewById(R.id.button)
-        // Roll the dice when the roll button is clicked
-        rollButton.setOnClickListener { rollDice() }
+        // Roll all dices when the roll button is clicked
+        rollButton.setOnClickListener {
+            for (diceId in listOf(R.id.dice1, R.id.dice2)) {
+                rollDice(diceId)
+            }
+        }
     }
 
     /**
      * Roll the dice and update the screen with the result.
      */
-    private fun rollDice() {
+    private fun rollDice(diceId: Int) {
         // Create new Dice object with 6 sides and roll it
         val dice = Dice(6)
         val diceRoll = dice.roll()
 
         // Update the screen with the dice roll
-        val resultTextView: TextView = findViewById(R.id.textView)
+        val resultTextView: TextView = findViewById(diceId)
         resultTextView.text = diceRoll.toString()
     }
 }
